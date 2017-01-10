@@ -89,6 +89,7 @@ class VerticaDialect(PyODBCConnector, PGDialect):
         return bool(rs.scalar())
 
     def _get_server_version_info(self, connection):
+        connection.setencoding(str, encoding='utf-8')
         v = connection.scalar("select version()")
         m = re.match(
             '.*Vertica Analytic Database '
