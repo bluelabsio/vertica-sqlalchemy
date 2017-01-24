@@ -50,7 +50,7 @@ class VerticaDialect(PyODBCConnector, PGDialect):
         'MONEY': sqltypes.NUMERIC,
     }
     name = 'vertica'
-    pyodbc_driver_name = 'Vertica'
+    pyodbc_driver_name = 'HPVertica'
 
     def has_schema(self, connection, schema):
         query = ("SELECT EXISTS (SELECT schema_name FROM v_catalog.schemata "
