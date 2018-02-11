@@ -50,7 +50,7 @@ class VerticaDialect(PyODBCConnector, PGDialect):
         'MONEY': sqltypes.NUMERIC,
     }
     name = 'vertica'
-    pyodbc_driver_name = 'HPVertica'
+    pyodbc_driver_name = 'Vertica'
 
     def has_schema(self, connection, schema):
         query = ("SELECT EXISTS (SELECT schema_name FROM v_catalog.schemata "
@@ -165,6 +165,13 @@ class VerticaDialect(PyODBCConnector, PGDialect):
 
     # constraints are enforced on selects, but returning nothing for these
     # methods allows table introspection to work
+
+    def get_unique_constraints(self, connection, table_name, schema=None,
+                               **kw):
+        return []
+
+    def get_check_constraints(self, connection, table_name, schema=None, **kw):
+        return []
 
     def get_pk_constraint(self, bind, table_name, schema, **kw):
         return {'constrained_columns': [], 'name': 'undefined'}
