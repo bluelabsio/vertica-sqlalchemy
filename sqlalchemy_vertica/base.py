@@ -166,6 +166,13 @@ class VerticaDialect(PyODBCConnector, PGDialect):
     # constraints are enforced on selects, but returning nothing for these
     # methods allows table introspection to work
 
+    def get_unique_constraints(self, connection, table_name, schema=None,
+                               **kw):
+        return []
+
+    def get_check_constraints(self, connection, table_name, schema=None, **kw):
+        return []
+
     def get_pk_constraint(self, bind, table_name, schema, **kw):
         return {'constrained_columns': [], 'name': 'undefined'}
 
